@@ -47,6 +47,7 @@ import com.omniplan.app.ui.theme.Slate600
 import com.omniplan.app.ui.theme.Slate700
 import com.omniplan.app.ui.theme.Slate800
 import com.omniplan.app.ui.theme.Slate850
+import com.omniplan.app.ui.theme.Slate900
 
 @Composable
 fun TaskCard(
