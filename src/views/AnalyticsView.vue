@@ -59,7 +59,7 @@
         </svg>
         <h4 class="text-xs font-bold text-slate-200">Автообновления N.ECO TASK</h4>
       </div>
-      <p class="text-[11px] text-slate-400 mb-3">Текущая версия: v1.0.0 (Стек Vue 3 + Rust Core)</p>
+      <p class="text-[11px] text-slate-400 mb-3">Текущая версия: v1.0.1 (Стек Vue 3 + Rust Core)</p>
       <button 
         @click="checkUpdates" 
         :disabled="isChecking"
