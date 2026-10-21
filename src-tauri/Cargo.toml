@@ -1,0 +1,22 @@
+[package]
+name = "neco-task"
+version = "1.0.0"
+description = "N.ECO TASK — Ультимативный планировщик задач на стеке Vue 3 + Rust"
+authors = ["Nikroder"]
+edition = "2021"
+
+[lib]
+name = "neco_task_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.0.0", features = [] }
+
+[dependencies]
+tauri = { version = "2.0.0", features = [] }
+tauri-plugin-shell = "2.0.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rusqlite = { version = "0.31", features = ["bundled"] }
+chrono = { version = "0.4", features = ["serde"] }
+regex = "1.10"
