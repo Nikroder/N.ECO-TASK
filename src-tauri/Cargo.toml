@@ -1,6 +1,6 @@
 [package]
 name = "neco-task"
-version = "1.0.2"
+version = "1.0.3"
 description = "N.ECO TASK — Ультимативный планировщик задач на стеке Vue 3 + Rust"
 authors = ["Nikroder"]
 edition = "2021"

@@ -6,9 +6,12 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,6 +46,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -74,7 +78,22 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(
+                android.graphics.Color.parseColor("#0F172A")
+            ),
+            navigationBarStyle = SystemBarStyle.dark(
+                android.graphics.Color.parseColor("#0F172A")
+            )
+        )
         super.onCreate(savedInstanceState)
+
+        window.statusBarColor = android.graphics.Color.parseColor("#0F172A")
+        window.navigationBarColor = android.graphics.Color.parseColor("#0F172A")
+        WindowCompat.getInsetsController(window, window.decorView)?.let { controller ->
+            controller.isAppearanceLightStatusBars = false
+            controller.isAppearanceLightNavigationBars = false
+        }
 
         setContent {
             OmniPlanTheme {
@@ -132,7 +151,10 @@ fun OmniPlanMainApp() {
     val currentRoute = navBackStackEntry?.destination?.route
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Slate900),
+        containerColor = Slate900,
         bottomBar = {
             NavigationBar(
                 containerColor = Slate900,

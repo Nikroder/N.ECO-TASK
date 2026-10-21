@@ -5,9 +5,16 @@
     <color name="on_primary_container">#21005D</color>
 
     <color name="secondary">#625B71</color>
-    <color name="background">#FEF7FF</color>
-    <color name="surface">#FEF7FF</color>
-    <color name="surface_variant">#E7E0EC</color>
+    <color name="background">#0F172A</color>
+    <color name="surface">#151E32</color>
+    <color name="surface_variant">#1E293B</color>
+
+    <!-- Cyber Slate Dark Theme Colors -->
+    <color name="slate_950">#0A0E1A</color>
+    <color name="slate_900">#0F172A</color>
+    <color name="slate_850">#151E32</color>
+    <color name="slate_800">#1E293B</color>
+    <color name="purple_primary">#8B5CF6</color>
 
     <!-- Priority colors -->
     <color name="priority_urgent">#D32F2F</color>
