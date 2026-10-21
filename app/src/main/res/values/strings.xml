@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OmniPlan</string>
+    <string name="app_name">N.ECO TASK</string>
     <string name="nav_tasks">Задачи</string>
     <string name="nav_calendar">Календарь</string>
     <string name="nav_habits">Привычки</string>
@@ -48,9 +48,16 @@
     <string name="reset">Сброс</string>
 
     <!-- Widgets -->
-    <string name="widget_today_tasks_title">Задачи на сегодня</string>
-    <string name="widget_today_tasks_desc">Интерактивный список дел на сегодня прямо на рабочем столе</string>
-    <string name="widget_quick_add_title">Быстрые действия</string>
+    <string name="widget_today_tasks_title">N.ECO TASK: Задачи на сегодня</string>
+    <string name="widget_today_tasks_desc">Интерактивный список дел N.ECO TASK прямо на рабочем столе</string>
+    <string name="widget_quick_add_title">N.ECO TASK: Быстрые действия</string>
     <string name="widget_quick_add_desc">Быстрое добавление задач и старт фокус-сессии</string>
     <string name="widget_no_tasks">На сегодня задач нет 🎉</string>
+
+    <!-- Updates -->
+    <string name="update_available_title">Доступно обновление N.ECO TASK</string>
+    <string name="update_download_button">Скачать и обновить</string>
+    <string name="update_later_button">Позже</string>
+    <string name="update_checking">Проверка наличия обновлений...</string>
+    <string name="update_latest">У вас установлена последняя версия N.ECO TASK</string>
 </resources>

@@ -86,7 +86,7 @@ class TodayTasksWidget : GlanceAppWidget() {
             ) {
                 Column(modifier = GlanceModifier.defaultWeight()) {
                     Text(
-                        text = "OmniPlan • ${DateTimeUtils.formatDate(today)}",
+                        text = "N.ECO TASK • ${DateTimeUtils.formatDate(today)}",
                         style = TextStyle(
                             color = ColorProvider(Color(0xFFBB86FC)),
                             fontSize = 12.sp,

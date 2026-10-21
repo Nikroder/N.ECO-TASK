@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "OmniPlan"
+rootProject.name = "NECO-TASK"
 include(":app")

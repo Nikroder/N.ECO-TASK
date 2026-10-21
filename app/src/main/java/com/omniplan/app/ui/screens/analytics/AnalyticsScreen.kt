@@ -192,6 +192,58 @@ fun AnalyticsScreen(
                 }
             }
         }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        // App Version & Updates Card
+        AppUpdateCard()
+    }
+}
+
+@Composable
+private fun AppUpdateCard() {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val coroutineScope = androidx.compose.runtime.rememberCoroutineScope()
+    var isChecking by androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf(false) }
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = "О приложении N.ECO TASK",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Текущая версия: v1.0.0 (Сборка с автообновлением)",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.outline,
+                fontSize = 12.sp
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            androidx.compose.material3.OutlinedButton(
+                onClick = {
+                    isChecking = true
+                    coroutineScope.launch {
+                        val update = com.omniplan.app.core.update.AppUpdateManager.checkForUpdates("1.0.0")
+                        isChecking = false
+                        if (update.hasUpdate) {
+                            android.widget.Toast.makeText(context, "Найдено обновление v${update.latestVersion}! Перезапустите приложение для установки.", android.widget.Toast.LENGTH_LONG).show()
+                        } else {
+                            android.widget.Toast.makeText(context, "У вас установлена последняя версия N.ECO TASK", android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                },
+                enabled = !isChecking,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = if (isChecking) "Проверка..." else "Проверить обновления на GitHub")
+            }
+        }
     }
 }
 
