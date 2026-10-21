@@ -11,13 +11,6 @@
 
 ---
 
-## 🌐 Интерактивный предпросмотр в браузере
-
-Попробуйте приложение прямо сейчас без установки:
-👉 **[https://nikroder.github.io/N.ECO-TASK/](https://nikroder.github.io/N.ECO-TASK/)**
-
----
-
 ## 📥 Скачать приложение для Android (APK)
 
 * [**Скачать актуальный N.ECO-TASK.apk**](https://github.com/Nikroder/N.ECO-TASK/releases/latest)
@@ -73,7 +66,6 @@ N.ECO-TASK/
  │    │    └── commands.rs         # Tauri IPC команды (get_tasks, create_task, etc.)
  │    ├── Cargo.toml               # Зависимости Rust
  │    └── tauri.conf.json          # Конфигурация Tauri
- ├── docs/                         # 🌐 Онлайн-версия для GitHub Pages
  ├── .github/workflows/            # 🚀 Автоматическая сборка APK на GitHub
  └── package.json                  # Скрипты Vite + Vue 3
 ```
