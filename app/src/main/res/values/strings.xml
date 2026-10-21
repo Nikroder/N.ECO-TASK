@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">OmniPlan</string>
+    <string name="nav_tasks">Задачи</string>
+    <string name="nav_calendar">Календарь</string>
+    <string name="nav_habits">Привычки</string>
+    <string name="nav_focus">Фокус</string>
+    <string name="nav_analytics">Аналитика</string>
+
+    <!-- Tasks -->
+    <string name="filter_all">Все</string>
+    <string name="filter_today">Сегодня</string>
+    <string name="filter_upcoming">Предстоящие</string>
+    <string name="filter_important">Важные</string>
+    <string name="filter_completed">Выполненные</string>
+    <string name="add_task">Новая задача</string>
+    <string name="task_title_hint">Что нужно сделать? (например, завтра в 15:00)</string>
+    <string name="task_desc_hint">Заметки, описание, ссылки...</string>
+    <string name="no_tasks">У вас нет активных задач! Время отдохнуть или спланировать новое.</string>
+    <string name="task_completed">Задача выполнена!</string>
+    <string name="task_deleted">Задача удалена</string>
+
+    <!-- Priority -->
+    <string name="priority_none">Без приоритета</string>
+    <string name="priority_low">Низкий</string>
+    <string name="priority_medium">Средний</string>
+    <string name="priority_high">Высокий</string>
+    <string name="priority_urgent">Срочно</string>
+
+    <!-- Calendar -->
+    <string name="calendar_day">День</string>
+    <string name="calendar_month">Месяц</string>
+    <string name="time_blocking">Тайм-блокинг</string>
+    <string name="add_time_block">Забронировать время</string>
+
+    <!-- Habits -->
+    <string name="habits_title">Привычки и ритуалы</string>
+    <string name="add_habit">Новая привычка</string>
+    <string name="streak_label">Серия:</string>
+    <string name="best_streak_label">Рекорд:</string>
+
+    <!-- Focus -->
+    <string name="focus_title">Глубокий фокус</string>
+    <string name="pomodoro_work">Работа (25 мин)</string>
+    <string name="pomodoro_short_break">Перерыв (5 мин)</string>
+    <string name="pomodoro_long_break">Отдых (15 мин)</string>
+    <string name="start">Старт</string>
+    <string name="pause">Пауза</string>
+    <string name="reset">Сброс</string>
+
+    <!-- Widgets -->
+    <string name="widget_today_tasks_title">Задачи на сегодня</string>
+    <string name="widget_today_tasks_desc">Интерактивный список дел на сегодня прямо на рабочем столе</string>
+    <string name="widget_quick_add_title">Быстрые действия</string>
+    <string name="widget_quick_add_desc">Быстрое добавление задач и старт фокус-сессии</string>
+    <string name="widget_no_tasks">На сегодня задач нет 🎉</string>
+</resources>
