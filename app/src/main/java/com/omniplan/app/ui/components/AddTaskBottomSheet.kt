@@ -1,6 +1,7 @@
 package com.omniplan.app.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,11 +24,7 @@ import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SheetState
@@ -44,6 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.omniplan.app.R
@@ -51,6 +49,16 @@ import com.omniplan.app.core.model.Priority
 import com.omniplan.app.core.model.Task
 import com.omniplan.app.core.util.DateTimeUtils
 import com.omniplan.app.core.util.NlpTaskParser
+import com.omniplan.app.ui.theme.PrimaryButtonGradient
+import com.omniplan.app.ui.theme.PurpleLight
+import com.omniplan.app.ui.theme.PurplePrimary
+import com.omniplan.app.ui.theme.Slate100
+import com.omniplan.app.ui.theme.Slate400
+import com.omniplan.app.ui.theme.Slate600
+import com.omniplan.app.ui.theme.Slate700
+import com.omniplan.app.ui.theme.Slate800
+import com.omniplan.app.ui.theme.Slate850
+import com.omniplan.app.ui.theme.Slate900
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -71,44 +79,59 @@ fun AddTaskBottomSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        dragHandle = { BottomSheetDefaults.DragHandle() },
-        containerColor = MaterialTheme.colorScheme.surface
+        dragHandle = {
+            BottomSheetDefaults.DragHandle(
+                color = Slate700
+            )
+        },
+        containerColor = Slate900
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
                 .imePadding()
-                .padding(bottom = 24.dp)
+                .padding(bottom = 28.dp)
         ) {
             Text(
                 text = stringResource(R.string.add_task),
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onSurface
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Slate100
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(14.dp))
 
             // Main input field
             OutlinedTextField(
                 value = rawInputText,
                 onValueChange = { rawInputText = it },
-                placeholder = { Text(stringResource(R.string.task_title_hint)) },
+                placeholder = {
+                    Text(
+                        stringResource(R.string.task_title_hint),
+                        fontSize = 14.sp,
+                        color = Slate600
+                    )
+                },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(14.dp),
                 trailingIcon = {
                     if (rawInputText.isNotBlank()) {
                         Icon(
                             imageVector = Icons.Default.AutoAwesome,
                             contentDescription = "Умный ввод",
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = PurplePrimary,
                             modifier = Modifier.size(20.dp)
                         )
                     }
                 },
                 colors = TextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+                    focusedTextColor = Slate100,
+                    unfocusedTextColor = Slate100,
+                    focusedContainerColor = Slate850,
+                    unfocusedContainerColor = Slate850,
+                    focusedIndicatorColor = PurplePrimary,
+                    unfocusedIndicatorColor = Slate700
                 )
             )
 
@@ -124,21 +147,23 @@ fun AddTaskBottomSheet(
                         Box(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(8.dp))
-                                .background(MaterialTheme.colorScheme.primaryContainer)
+                                .background(PurplePrimary.copy(alpha = 0.2f))
+                                .border(1.dp, PurplePrimary.copy(alpha = 0.4f), RoundedCornerShape(8.dp))
                                 .padding(horizontal = 8.dp, vertical = 4.dp)
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Icon(
                                     imageVector = Icons.Default.CalendarToday,
                                     contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    tint = PurpleLight,
                                     modifier = Modifier.size(12.dp)
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
                                     text = DateTimeUtils.formatRelativeDateTime(dt),
-                                    fontSize = 12.sp,
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    color = PurpleLight
                                 )
                             }
                         }
@@ -152,13 +177,15 @@ fun AddTaskBottomSheet(
                         Box(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(8.dp))
-                                .background(MaterialTheme.colorScheme.secondaryContainer)
+                                .background(Slate800)
+                                .border(1.dp, Slate700, RoundedCornerShape(8.dp))
                                 .padding(horizontal = 8.dp, vertical = 4.dp)
                         ) {
                             Text(
                                 text = "#$tag",
-                                fontSize = 12.sp,
-                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = PurpleLight
                             )
                         }
                     }
@@ -171,13 +198,23 @@ fun AddTaskBottomSheet(
             OutlinedTextField(
                 value = descriptionText,
                 onValueChange = { descriptionText = it },
-                placeholder = { Text(stringResource(R.string.task_desc_hint)) },
+                placeholder = {
+                    Text(
+                        stringResource(R.string.task_desc_hint),
+                        fontSize = 13.sp,
+                        color = Slate600
+                    )
+                },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(14.dp),
                 maxLines = 3,
                 colors = TextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.15f),
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.15f)
+                    focusedTextColor = Slate100,
+                    unfocusedTextColor = Slate100,
+                    focusedContainerColor = Slate850,
+                    unfocusedContainerColor = Slate850,
+                    focusedIndicatorColor = PurplePrimary,
+                    unfocusedIndicatorColor = Slate700
                 )
             )
 
@@ -192,54 +229,85 @@ fun AddTaskBottomSheet(
                 Icon(
                     imageVector = Icons.Default.Flag,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.outline,
+                    tint = Slate400,
                     modifier = Modifier.size(18.dp)
                 )
                 listOf(Priority.NONE, Priority.LOW, Priority.MEDIUM, Priority.HIGH, Priority.URGENT).forEach { p ->
                     val effectivePriority = if (parsedResult.priority != Priority.NONE) parsedResult.priority else selectedPriority
-                    FilterChip(
-                        selected = effectivePriority == p,
-                        onClick = { selectedPriority = p },
-                        label = { Text(stringResource(p.titleRes), fontSize = 11.sp) }
-                    )
+                    val isSelected = effectivePriority == p
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(if (isSelected) p.color.copy(alpha = 0.25f) else Slate850)
+                            .border(
+                                1.dp,
+                                if (isSelected) p.color else Slate700,
+                                RoundedCornerShape(8.dp)
+                            )
+                            .clickable { selectedPriority = p }
+                            .padding(horizontal = 8.dp, vertical = 5.dp)
+                    ) {
+                        Text(
+                            text = stringResource(p.titleRes),
+                            fontSize = 11.sp,
+                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                            color = if (isSelected) p.color else Slate400
+                        )
+                    }
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
             // Submit Button
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                IconButton(
-                    onClick = {
-                        if (rawInputText.isNotBlank()) {
-                            val finalPriority = if (parsedResult.priority != Priority.NONE) parsedResult.priority else selectedPriority
-                            val task = Task(
-                                title = parsedResult.cleanTitle,
-                                description = descriptionText.trim(),
-                                dueDateTime = parsedResult.dueDateTime,
-                                reminderDateTime = parsedResult.dueDateTime,
-                                priority = finalPriority,
-                                tags = parsedResult.tags,
-                                recurrence = parsedResult.recurrence
-                            )
-                            onSaveTask(task)
-                            onDismiss()
-                        }
-                    },
-                    enabled = rawInputText.isNotBlank(),
-                    colors = IconButtonDefaults.filledIconButtonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    ),
-                    modifier = Modifier.size(48.dp)
+                val canSubmit = rawInputText.isNotBlank()
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(14.dp))
+                        .then(
+                            if (canSubmit) {
+                                Modifier
+                                    .background(PrimaryButtonGradient)
+                                    .clickable {
+                                        val finalPriority = if (parsedResult.priority != Priority.NONE) parsedResult.priority else selectedPriority
+                                        val task = Task(
+                                            title = parsedResult.cleanTitle,
+                                            description = descriptionText.trim(),
+                                            dueDateTime = parsedResult.dueDateTime,
+                                            reminderDateTime = parsedResult.dueDateTime,
+                                            priority = finalPriority,
+                                            tags = parsedResult.tags,
+                                            recurrence = parsedResult.recurrence
+                                        )
+                                        onSaveTask(task)
+                                        onDismiss()
+                                    }
+                            } else {
+                                Modifier.background(Slate800)
+                            }
+                        )
+                        .padding(horizontal = 20.dp, vertical = 12.dp),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Send,
-                        contentDescription = "Сохранить",
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.Send,
+                            contentDescription = "Сохранить",
+                            tint = if (canSubmit) Color.White else Slate600,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Создать задачу",
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = if (canSubmit) Color.White else Slate600
+                        )
+                    }
                 }
             }
         }

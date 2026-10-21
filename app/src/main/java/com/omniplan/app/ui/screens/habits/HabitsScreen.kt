@@ -1,6 +1,8 @@
 package com.omniplan.app.ui.screens.habits
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,21 +17,24 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -40,12 +45,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.omniplan.app.R
 import com.omniplan.app.ui.components.HabitCard
+import com.omniplan.app.ui.theme.AmberAccent
+import com.omniplan.app.ui.theme.EmeraldAccent
+import com.omniplan.app.ui.theme.FabGradient
+import com.omniplan.app.ui.theme.PurpleLight
+import com.omniplan.app.ui.theme.PurplePrimary
+import com.omniplan.app.ui.theme.Slate100
+import com.omniplan.app.ui.theme.Slate400
+import com.omniplan.app.ui.theme.Slate600
+import com.omniplan.app.ui.theme.Slate700
+import com.omniplan.app.ui.theme.Slate800
+import com.omniplan.app.ui.theme.Slate850
+import com.omniplan.app.ui.theme.Slate900
 import java.time.LocalDate
 
 @Composable
@@ -56,16 +76,22 @@ fun HabitsScreen(
     var showAddHabitDialog by remember { mutableStateOf(false) }
 
     Scaffold(
+        containerColor = Slate900,
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = { showAddHabitDialog = true },
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
-                shape = RoundedCornerShape(16.dp)
+            Box(
+                modifier = Modifier
+                    .shadow(16.dp, RoundedCornerShape(18.dp), ambientColor = PurplePrimary, spotColor = PurplePrimary)
+                    .clip(RoundedCornerShape(18.dp))
+                    .background(FabGradient)
+                    .clickable { showAddHabitDialog = true }
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(R.string.add_habit)
+                    contentDescription = stringResource(R.string.add_habit),
+                    tint = Color.White,
+                    modifier = Modifier.size(24.dp)
                 )
             }
         }
@@ -77,12 +103,29 @@ fun HabitsScreen(
                 .padding(horizontal = 16.dp)
         ) {
             // Header
-            Text(
-                text = stringResource(R.string.habits_title),
-                style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(top = 16.dp, bottom = 12.dp)
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp, bottom = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = stringResource(R.string.habits_title),
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Black,
+                        letterSpacing = (-0.5).sp,
+                        color = Slate100
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = "N.ECO TASK • Трекер дисциплины и привычек",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = PurpleLight
+                    )
+                }
+            }
 
             // Consistency Heatmap Card
             HabitHeatmapCard()
@@ -97,16 +140,43 @@ fun HabitsScreen(
                         .padding(bottom = 64.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = "Создайте свою первую привычку!\nМаленькие шаги каждый день ведут к большим результатам.",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.outline
-                    )
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Box(
+                            modifier = Modifier
+                                .size(72.dp)
+                                .clip(CircleShape)
+                                .background(Slate800)
+                                .border(1.5.dp, AmberAccent.copy(alpha = 0.5f), CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.LocalFireDepartment,
+                                contentDescription = null,
+                                tint = AmberAccent,
+                                modifier = Modifier.size(36.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Создайте свою первую привычку!",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Slate100
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+                        Text(
+                            text = "Маленькие регулярные шаги каждый день ведут к большим результатам.",
+                            fontSize = 13.sp,
+                            color = Slate400,
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
             } else {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 88.dp)
                 ) {
                     items(habits, key = { it.id }) { habit ->
                         HabitCard(
@@ -127,33 +197,64 @@ fun HabitsScreen(
 
         AlertDialog(
             onDismissRequest = { showAddHabitDialog = false },
-            title = { Text(stringResource(R.string.add_habit)) },
+            containerColor = Slate850,
+            title = {
+                Text(
+                    stringResource(R.string.add_habit),
+                    fontWeight = FontWeight.Bold,
+                    color = Slate100
+                )
+            },
             text = {
                 Column {
                     OutlinedTextField(
                         value = title,
                         onValueChange = { title = it },
-                        placeholder = { Text("Название (например: Чтение 20 мин)") },
-                        modifier = Modifier.fillMaxWidth()
+                        placeholder = { Text("Название (например: Чтение 20 мин)", color = Slate600) },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = TextFieldDefaults.colors(
+                            focusedTextColor = Slate100,
+                            unfocusedTextColor = Slate100,
+                            focusedContainerColor = Slate800,
+                            unfocusedContainerColor = Slate800,
+                            focusedIndicatorColor = PurplePrimary,
+                            unfocusedIndicatorColor = Slate700
+                        )
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
                     OutlinedTextField(
                         value = description,
                         onValueChange = { description = it },
-                        placeholder = { Text("Мотивация или заметка...") },
-                        modifier = Modifier.fillMaxWidth()
+                        placeholder = { Text("Мотивация или заметка...", color = Slate600) },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = TextFieldDefaults.colors(
+                            focusedTextColor = Slate100,
+                            unfocusedTextColor = Slate100,
+                            focusedContainerColor = Slate800,
+                            unfocusedContainerColor = Slate800,
+                            focusedIndicatorColor = PurplePrimary,
+                            unfocusedIndicatorColor = Slate700
+                        )
                     )
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(14.dp))
                     Text(
                         text = "Цель: ${targetDays.toInt()} дней в неделю",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.primary
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = PurpleLight
                     )
                     Slider(
                         value = targetDays,
                         onValueChange = { targetDays = it },
                         valueRange = 1f..7f,
-                        steps = 5
+                        steps = 5,
+                        colors = SliderDefaults.colors(
+                            thumbColor = PurplePrimary,
+                            activeTrackColor = PurplePrimary,
+                            inactiveTrackColor = Slate700
+                        )
                     )
                 }
             },
@@ -164,14 +265,15 @@ fun HabitsScreen(
                             viewModel.addHabit(title, description, targetDays.toInt())
                             showAddHabitDialog = false
                         }
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = PurplePrimary)
                 ) {
-                    Text("Создать")
+                    Text("Создать", color = Color.White)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showAddHabitDialog = false }) {
-                    Text("Отмена")
+                    Text("Отмена", color = Slate400)
                 }
             }
         )
@@ -183,40 +285,43 @@ private fun HabitHeatmapCard() {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+        colors = CardDefaults.cardColors(containerColor = Slate850),
+        border = CardDefaults.outlinedCardBorder().copy(
+            brush = androidx.compose.ui.graphics.SolidColor(Slate700),
+            width = 1.dp
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
-        Column(modifier = Modifier.padding(14.dp)) {
+        Column(modifier = Modifier.padding(16.dp)) {
             Text(
                 text = "Карта дисциплины (Heatmap)",
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+                color = Slate100
             )
             Text(
                 text = "Активность за последние недели",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.outline,
-                fontSize = 12.sp
+                fontSize = 12.sp,
+                color = Slate400
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
-            // GitHub-style grid: 12 weeks columns x 7 days rows
+            // GitHub-style grid: 16 weeks columns x 7 days rows
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                val today = LocalDate.now()
                 for (week in 0 until 16) {
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         for (day in 0 until 7) {
-                            // Semi-realistic activity levels simulation for visual satisfaction
                             val isFilled = (week * 7 + day) % 3 != 0
                             val boxColor = if (isFilled) {
-                                Color(0xFF4CAF50).copy(alpha = if ((week + day) % 2 == 0) 0.85f else 0.45f)
+                                EmeraldAccent.copy(alpha = if ((week + day) % 2 == 0) 0.85f else 0.45f)
                             } else {
-                                MaterialTheme.colorScheme.surfaceVariant
+                                Slate800
                             }
 
                             Box(

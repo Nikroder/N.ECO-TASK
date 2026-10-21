@@ -11,19 +11,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80,
-    background = BackgroundDark,
-    surface = SurfaceDark,
-    surfaceVariant = SurfaceVariantDark,
-    outline = OutlineDark
+    primary = PurplePrimary,
+    onPrimary = Slate100,
+    primaryContainer = Slate800,
+    onPrimaryContainer = PurpleLight,
+    secondary = IndigoAccent,
+    onSecondary = Slate100,
+    tertiary = CyanAccent,
+    onTertiary = Slate100,
+    background = Slate900,
+    onBackground = Slate100,
+    surface = Slate850,
+    onSurface = Slate100,
+    surfaceVariant = Slate800,
+    onSurfaceVariant = Slate400,
+    outline = Slate700,
+    outlineVariant = Slate800
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40,
+    primary = PurpleDark,
+    secondary = IndigoDark,
+    tertiary = CyanAccent,
     background = BackgroundLight,
     surface = SurfaceLight,
     surfaceVariant = SurfaceVariantLight,
@@ -33,7 +42,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun OmniPlanTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false, // Disabled by default to retain custom cyber slate & violet branding
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

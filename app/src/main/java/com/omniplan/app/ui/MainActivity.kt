@@ -22,6 +22,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -34,8 +35,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
@@ -60,6 +64,11 @@ import com.omniplan.app.ui.screens.habits.HabitsViewModel
 import com.omniplan.app.ui.screens.tasks.TasksScreen
 import com.omniplan.app.ui.screens.tasks.TasksViewModel
 import com.omniplan.app.ui.theme.OmniPlanTheme
+import com.omniplan.app.ui.theme.PurpleDark
+import com.omniplan.app.ui.theme.PurpleLight
+import com.omniplan.app.ui.theme.Slate400
+import com.omniplan.app.ui.theme.Slate800
+import com.omniplan.app.ui.theme.Slate900
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -125,7 +134,18 @@ fun OmniPlanMainApp() {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            NavigationBar {
+            NavigationBar(
+                containerColor = Slate900,
+                tonalElevation = 0.dp,
+                modifier = Modifier.drawBehind {
+                    drawLine(
+                        color = Slate800,
+                        start = Offset(0f, 0f),
+                        end = Offset(size.width, 0f),
+                        strokeWidth = 1.dp.toPx()
+                    )
+                }
+            ) {
                 Screen.bottomNavScreens.forEach { screen ->
                     val selected = currentRoute == screen.route
                     NavigationBarItem(
@@ -148,8 +168,19 @@ fun OmniPlanMainApp() {
                             )
                         },
                         label = {
-                            Text(text = stringResource(screen.titleRes))
-                        }
+                            Text(
+                                text = stringResource(screen.titleRes),
+                                fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                                fontSize = 11.sp
+                            )
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = PurpleLight,
+                            selectedTextColor = PurpleLight,
+                            indicatorColor = PurpleDark.copy(alpha = 0.25f),
+                            unselectedIconColor = Slate400,
+                            unselectedTextColor = Slate400
+                        )
                     )
                 }
             }
