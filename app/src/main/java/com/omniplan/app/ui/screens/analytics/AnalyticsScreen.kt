@@ -1226,7 +1226,7 @@ private fun RewindSlideFinal(stats: RewindStats, onDismiss: () -> Unit) {
 
         Button(
             onClick = {
-                android.widget.Toast.makeText(context, "Итоги недели сохранены в память!", android.widget.Toast.SHORT).show()
+                android.widget.Toast.makeText(context, "Итоги недели сохранены в память!", android.widget.Toast.LENGTH_SHORT).show()
                 onDismiss()
             },
             colors = ButtonDefaults.buttonColors(containerColor = PurplePrimary),
